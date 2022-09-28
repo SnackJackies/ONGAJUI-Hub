@@ -1,0 +1,256 @@
+
+if game.PlaceId ~= 6923268988 then
+    game.Players.LocalPlayer:Kick("ขอเซ็ทหย่อ")
+end
+    
+
+local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/SnackJackies/ONGAJUI-Hub/main/Library")()
+
+local win = Flux:Window("ONGAJUI Hub", "[ V. Premium Beta ]", Color3.fromRGB(255, 0, 0), Enum.KeyCode.RightControl)
+local AutoFarmTab = win:Tab("Auto Farm", "http://www.roblox.com/asset/?id=6035047381")
+
+_G.SelectToolWeapon = ""
+function EquipWeapon(ToolSe)
+    if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+        getgenv().tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+        wait(.1)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+    end
+end
+
+function AutoFarmDesert()
+    local Enemy = game.Workspace:FindFirstChild("Desert Ninja Leader")
+    if Enemy.Humanoid.Health ~= 0 then 
+    game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = Enemy.HumanoidRootPart.CFrame * CFrame.new(0,0,2)
+    end
+end
+
+function AutoFarmIceArenaBoss()
+    local Enemy = game.Workspace:FindFirstChild("Giant Ice Ninja")
+    if Enemy.Humanoid.Health ~= 0 then 
+    game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = Enemy.HumanoidRootPart.CFrame * CFrame.new(0,0,2)
+    end
+end
+
+function Click()
+    game:GetService('VirtualUser'):CaptureController()
+    game:GetService('VirtualUser'):Button1Down(Vector2.new(1280, 672))
+end
+
+AutoFarmTab:Toggle("Auto-Farm Ice Arena Boss", "Automatically farm Ice Arena Boss for you.",false,function(value)
+    _G.AutoFarmIceNinja = value
+    while _G.AutoFarmIceNinja do wait()
+    spawn(function()
+        EquipWeapon(_G.SelectToolWeapon)
+        Click()
+        AutoFarmIceArenaBoss()
+    end)
+    end
+end)
+AutoFarmTab:Toggle("Auto-Farm Desert Boss", "Automatically farm Desert Boss for you.", false,function(Value)
+    _G.AutoFarmDesertBoss = Value
+    while _G.AutoFarmDesertBoss do wait()
+    spawn(function()
+        EquipWeapon(_G.SelectToolWeapon)
+        Click()
+        AutoFarmDesert()
+    end)
+    end
+end)
+local Weapon = {}
+for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
+    if v:IsA("Tool") then
+    table.insert(Weapon ,v.Name)
+     end
+    end
+local SelectWeapon = AutoFarmTab:Dropdown("Select Weapon", Weapon, function(Value)
+    _G.SelectToolWeapon = Value
+end)
+local RefreshWeapon = AutoFarmTab:Button("Refresh Weapons", "Refresh Wepons in players inventory.", function()
+    SelectWeapon:Clear()
+    local Weapon = {}
+    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+    if v:IsA("Tool") then
+        SelectWeapon:Add(v.Name)
+    end
+    end
+    for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+    if v:IsA("Tool") then
+        SelectWeapon:Add(v.Name)
+    end
+    end
+end)
+------
+local PlacesTab = win:Tab("Teleport to Places", "http://www.roblox.com/asset/?id=6035190846")
+
+PlacesTab:Button("Desert Area", "Teleport to Places you click.", function()
+    local Character = game.Players.LocalPlayer.Character
+    Character.HumanoidRootPart.CFrame = game.Workspace.Cactus.Part.CFrame
+end)
+PlacesTab:Button("Ice Arena", "Teleport to Places you click.", function()
+    local Character = game.Players.LocalPlayer.Character
+    Character.HumanoidRootPart.CFrame = CFrame.new(-589.700073, 0.30000031, 406.800079, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+end)
+PlacesTab:Button("Observation Tower", "Teleport to Places you click.", function()
+    local Character = game.Players.LocalPlayer.Character
+    Character.HumanoidRootPart.CFrame = CFrame.new(-635.933777, 3.49594069, -16.1107635, 0.664444804, 0.664475858, -0.342030644, -0.707129538, 0.70708406, -2.41473317e-05, 0.241828382, 0.241876006, 0.939688802)
+end)
+PlacesTab:Button("Dead Tree Forest", "Teleport to Places you click.", function()
+    local Character = game.Players.LocalPlayer.Character
+    Character.HumanoidRootPart.CFrame = CFrame.new(-360.150024, 2.7010355, -297.000031, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+PlacesTab:Button("Sakura Blossom Forest", "Teleport to Places you click.", function()
+    local Character = game.Players.LocalPlayer.Character
+    Character.HumanoidRootPart.CFrame = CFrame.new(-191.050751, 14.8701553, 369.901642, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+PlacesTab:Button("Middle Field", "Teleport to Places you click.", function()
+    local Character = game.Players.LocalPlayer.Character
+    Character.HumanoidRootPart.CFrame = CFrame.new(-66.250061, 0.104658991, 164.607742, 1, 5.98163842e-06, 9.78999597e-05, -5.9789686e-06, 1, -2.7273969e-05, -9.79001197e-05, 2.72733832e-05, 1)
+end)
+PlacesTab:Button("Secret Area", "Teleport to Places you click.", function()
+    local Character = game.Players.LocalPlayer.Character
+    Character.HumanoidRootPart.CFrame = CFrame.new(-93.2587585, -102.316612, 443.151611, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+------
+local PlayerTab = win:Tab("Players", "http://www.roblox.com/asset/?id=6034754445")
+
+local AllPlayers = {}
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    table.insert(AllPlayers, v.Name)
+end
+local SelectPlayer = PlayerTab:Dropdown("Select Player", AllPlayers,function(t)
+    local PlayerTP = t
+end)
+PlayerTab:Button("Teleport to Player", "Click here to teleport to selected player.", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[PlayerTP].Character.HumanoidRootPart.CFrame
+end)
+PlayerTab:Button("Refresh Players","Refresh Players list.", function()
+    SelectPlayer:Clear()
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    table.insert(AllPlayers, v.Name)
+end
+end)
+
+PlayerTab:Line()
+
+PlayerTab:Slider("Walk Speed", "Set your Walkspeed here", 0, 100, 16, function(t)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = t
+end)
+PlayerTab:Slider("Jump Power", "Set your Jumppower here", 0, 350, 50, function(t)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = t
+end)
+------
+local MiscTab = win:Tab("Misc", "http://www.roblox.com/asset/?id=6034744064")
+
+local WeaponsSaved = {}
+for i,v in pairs(game.ReplicatedStorage:WaitForChild("ItemSave"):GetChildren()) do  
+    table.insert(WeaponsSaved ,v.Name)
+    end
+MiscTab:Dropdown("Fake Weapons", WeaponsSaved, function(t)
+    FakeWeaponSelected = t
+end)
+MiscTab:Button("Clone Weapon", "Clone Selected Weapon", function()
+    game:GetService("ReplicatedStorage").ItemSave[FakeWeaponSelected]:Clone().Parent = game.Players.LocalPlayer.Backpack
+end)
+MiscTab:Line()
+MiscTab:Button("INF MONEY", "This will make you rich. If you just joined the game you need to wait 2-3 minutes to make this func work." , function()
+        for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+            if v.Name == "Golden Chest" then
+                while wait() do
+                fireclickdetector(v.ClickDetector)
+            end
+                end
+        end
+end)
+
+------
+local VisualTab = win:Tab("Visual", "http://www.roblox.com/asset/?id=6034304881")
+
+VisualTab:Button("No Fog", "Remove Fog from the game.", function()
+   for i,v in pairs(game:GetService("Lighting"):GetChildren()) do
+   v:Destroy()
+   end
+end)
+VisualTab:Button("Full Bright", "Full Brightness.", function()
+local Light = game:GetService("Lighting")
+ 
+function dofullbright()
+Light.Ambient = Color3.new(1, 1, 1)
+Light.ColorShift_Bottom = Color3.new(1, 1, 1)
+Light.ColorShift_Top = Color3.new(1, 1, 1)
+end
+ 
+dofullbright()
+ 
+Light.LightingChanged:Connect(dofullbright)
+end)
+VisualTab:Button("RTX Mode", "Better game experience with RTX Mode.", function()
+    getgenv().mode = "Autumn" -- Choose from Summer and Autumn
+            settings().Rendering.QualityLevel = 10
+            local a = game.Lighting
+            a.Ambient = Color3.fromRGB(33, 33, 33)
+            a.Brightness = 6.67
+            a.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
+            a.ColorShift_Top = Color3.fromRGB(255, 247, 237)
+            a.EnvironmentDiffuseScale = 0.105
+            a.EnvironmentSpecularScale = 0.522
+            a.GlobalShadows = true
+            a.OutdoorAmbient = Color3.fromRGB(51, 54, 67)
+            a.ShadowSoftness = 0.04
+            a.GeographicLatitude = -15.525
+            a.ExposureCompensation = 0.75
+            local b = Instance.new("BloomEffect", a)
+            b.Enabled = true
+            b.Intensity = 0.04
+            b.Size = 1900
+            b.Threshold = 0.915
+            local c = Instance.new("ColorCorrectionEffect", a)
+            c.Brightness = 0.176
+            c.Contrast = 0.39
+            c.Enabled = true
+            c.Saturation = 0.2
+            c.TintColor = Color3.fromRGB(217, 145, 57)
+            if getgenv().mode == "Summer" then
+                c.TintColor = Color3.fromRGB(255, 220, 148)
+            elseif getgenv().mode == "Autumn" then
+                c.TintColor = Color3.fromRGB(217, 145, 57)
+            else
+                warn("No mode selected!")
+                print("Please select a mode")
+                b:Destroy()
+                c:Destroy()
+            end
+            local d = Instance.new("DepthOfFieldEffect", a)
+            d.Enabled = true
+            d.FarIntensity = 0.077
+            d.FocusDistance = 21.54
+            d.InFocusRadius = 20.77
+            d.NearIntensity = 0.277
+            local e = Instance.new("ColorCorrectionEffect", a)
+            e.Brightness = 0
+            e.Contrast = -0.07
+            e.Saturation = 0
+            e.Enabled = true
+            e.TintColor = Color3.fromRGB(255, 247, 239)
+            local e2 = Instance.new("ColorCorrectionEffect", a)
+            e2.Brightness = 0.2
+            e2.Contrast = 0.45
+            e2.Saturation = -0.1
+            e2.Enabled = true
+            e2.TintColor = Color3.fromRGB(255, 255, 255)
+            local s = Instance.new("SunRaysEffect", a)
+            s.Enabled = true
+            s.Intensity = 0.01
+            s.Spread = 0.146
+end)
+------
+local SettingsTab = win:Tab("Settings", "http://www.roblox.com/asset/?id=6034509993")
+
+SettingsTab:Button("Terminate GUI", "Destroy the GUI." , function()
+    local GUI = game.CoreGui:FindFirstChild("FluxLib")
+    if GUI then
+        GUI:Destroy()
+    end
+end)
+SettingsTab:Line()
+SettingsTab:Label("Credit to @SnackJack#3092 for making this masterpiece.")
