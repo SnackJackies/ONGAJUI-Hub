@@ -3,7 +3,7 @@ if game.CoreGui:FindFirstChild("ONGAJUI Hub") then
 end
 
 local library = {
-	WorkspaceName = "ONGAJUI Hub - A Piece",
+	WorkspaceName = "ONGAJUI Hub",
 	flags = {},
 	signals = {},
 	objects = {},
@@ -805,7 +805,7 @@ function library:CreateWindow(options, ...)
 	headline.BackgroundColor3 = Color3.new(1, 1, 1)
 	headline.BackgroundTransparency = 1
 	headline.LayoutOrder = 1
-	headline.Font = Enum.Font.SourceSans
+	headline.Font = Enum.Font.SourceSansBold
 	headline.Text = (windowName and tostring(windowName)) or "???"
 	headline.TextColor3 = library.colors.main
 	colored[1 + #colored] = {headline, "TextColor3", "main"}
@@ -909,7 +909,7 @@ function library:CreateWindow(options, ...)
 		else
 			colored_newTab_TextColor3 = {newTab, "TextColor3", "tabText"}
 			colored[1 + #colored] = colored_newTab_TextColor3
-			newTab.Font = Enum.Font.SourceSansBold
+			newTab.Font = Enum.Font.SourceSans
 			newTab.Text = (tabName and tostring(tabName)) or "???"
 			if windowFunctions.tabCount ~= 1 then
 				colored_newTab_TextColor3[4] = 1.35
@@ -1056,7 +1056,7 @@ function library:CreateWindow(options, ...)
 			sectionHeadline.BackgroundTransparency = 1
 			sectionHeadline.Position = UDim2.fromOffset(18, -8)
 			sectionHeadline.ZIndex = 2
-			sectionHeadline.Font = Enum.Font.SourceSansBold
+			sectionHeadline.Font = Enum.Font.SourceSans
 			sectionHeadline.LineHeight = 1.15
 			sectionHeadline.Text = (sectionName and sectionName or "???")
 			sectionHeadline.TextColor3 = library.colors.section
@@ -1159,7 +1159,7 @@ function library:CreateWindow(options, ...)
 				toggleHeadline.BackgroundTransparency = 1
 				toggleHeadline.Position = UDim2.fromScale(0.123, 0.165842161)
 				toggleHeadline.Size = UDim2.fromOffset(170, 11)
-				toggleHeadline.Font = Enum.Font.Code
+				toggleHeadline.Font = Enum.Font.SourceSans
 				toggleHeadline.Text = toggleName or "???"
 				toggleHeadline.TextColor3 = library.colors.elementText
 				local colored_toggleHeadline_TextColor3 = {toggleHeadline, "TextColor3", "elementText", (lockedup and 0.5) or nil}
@@ -1253,7 +1253,7 @@ function library:CreateWindow(options, ...)
 					keybindButton.Position = UDim2.fromScale(0.598130822, 0.184210524)
 					keybindButton.Selectable = false
 					keybindButton.Size = UDim2.fromOffset(46, 12)
-					keybindButton.Font = Enum.Font.SourceSansBold
+					keybindButton.Font = Enum.Font.SourceSans
 					keybindButton.Text = keyName or (presetKeybind and tostring(presetKeybind):gsub("Enum.KeyCode.", "")) or "[NONE]"
 					keybindButton.TextColor3 = library.colors.otherElementText
 					local colored_keybindButton_TextColor3 = {keybindButton, "TextColor3", "otherElementText"}
