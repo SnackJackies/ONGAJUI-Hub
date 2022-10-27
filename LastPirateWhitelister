@@ -1,7 +1,8 @@
 local Hwid = {
     ["SnackJack"] = "23B25987-4A17-4118-99D8-A09513A84534",
     ["23B25987"] = "23B25987-4A17-4118-99D8-A09513A84534",
-    ["awa"] = "23B25987-4A17-4118-99D8-A09513A84534"
+    ["awa"] = "23B25987-4A17-4118-99D8-A09513A84534",
+    ["59468BE8"] = "59468BE8-0497-49A8-B7E3-7576F0CDFB64"
 }
 
 local CliID = game:GetService("RbxAnalyticsService"):GetClientId()
