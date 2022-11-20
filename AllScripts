@@ -1,0 +1,11 @@
+local Id = game.PlaceId
+
+if Id == 6923268988 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SnackJackies/ONGAJUI-Hub/main/Ninja%20Legacy"))();
+elseif Id == 9144187696 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SnackJackies/ONGAJUI-Hub/main/A%20Piece"))();
+elseif Id == 2753915549 or 4442272183 or 7449423635 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SnackJackies/ONGAJUI-Hub/main/BountyHuntScript"))();
+elseif Id == 4520749081 or 6381829480 or 5931540094 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SnackJackies/ONGAJUI-Hub/main/King_Legacy"))();
+end
