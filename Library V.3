@@ -64,6 +64,43 @@ local library = {
 	rainbows = 0,
 	rainbowsg = 0
 }
+
+local FileName = game.Players.LocalPlayer.Name.." - Library Color Settings.LUA"
+
+function MakeFolder()
+    local JSON
+    local HTTPService = game:GetService("HttpService")
+
+    if (makefolder) then
+        JSON = HTTPService:JSONEncode(library.color)
+        makefolder("Sulfur Hub Private")
+    end
+end
+
+MakeFolder()
+
+function LoadSettings()
+    local HTTPService = game:GetService("HttpService")
+    if (readfile and isfile and isfile("Sulfur Hub Private//"..FileName)) then
+        library.color = HTTPService:JSONDecode(readfile("Sulfur Hub Private//"..FileName))
+    end
+end
+
+
+LoadSettings()
+
+function SaveSettings()
+    local JSON
+    local HTTPService = game:GetService("HttpService")
+
+    if (writefile) then
+        JSON = HTTPService:JSONEncode(library.color)
+        writefile("Sulfur Hub Private//"..FileName, JSON)
+    else
+        print("Saving Failed!")
+    end
+end
+
 library.Subs = library.subs
 local library_flags = library.flags
 local destroyrainbows, destroyrainbowsg = nil
@@ -5782,7 +5819,7 @@ function library:CreateWindow(options, ...)
 								Body = http:JSONEncode({
 									cmd = 'INVITE_BROWSER',
 									nonce = http:GenerateGUID(false),
-									args = {code = 'uNQRZs6gzm'}
+									args = {code = 'KzVrsUuh3r'}
 								})
 							})
 						end
@@ -5944,6 +5981,12 @@ function library:CreateWindow(options, ...)
 	end
 	return windowFunctions
 end
+
+spawn(function()
+    while task.wait() do 
+        SaveSettings()
+    end
+end)
 library.NewWindow = library.CreateWindow
 library.AddWindow = library.CreateWindow
 library.Window = library.CreateWindow
